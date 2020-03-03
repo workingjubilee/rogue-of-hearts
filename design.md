@@ -77,6 +77,8 @@ they're not bothering with you immediately.
 the goal is to reach the top and take out the cannons, so the 7th floor has
 a mostly predetermined premise.
 
+cannons are mounted and pivot on trunnions.
+
 try to make options and choices in exploration
 try to avoid having it turn into one big battle
 let the player pick apart the fortress even if that feels illogical.
@@ -87,5 +89,4 @@ spawn chests of loot, etc. at level procgen.
 this prevents players from feeling like they have to grind reinforcements.
 levels are persistent.
 7 floors
-basement, walls, courtyard, penetrating multiple bastions?
-
+basement, walls, courtyard, penetrating multiple curtain walls maybe?

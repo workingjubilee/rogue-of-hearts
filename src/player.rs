@@ -1,7 +1,8 @@
 use bracket_lib::prelude::{VirtualKeyCode, BTerm};
+extern crate specs;
+use super::{Map, Player, Position, State, TileType, Viewshed};
 use specs::prelude::*;
-use super::{Position, Player, TileType, xy_idx, State};
-use std::cmp::{min, max};
+use std::cmp::{max, min};
 
 enum Direction {
     N,
@@ -18,7 +19,9 @@ enum Direction {
 fn try_move_player(dir: Direction, ecs: &mut World) {
     let mut positions = ecs.write_storage::<Position>();
     let mut players = ecs.write_storage::<Player>();
-    let map = ecs.fetch::<Vec<TileType>>();
+    let mut viewsheds = ecs.write_storage::<Viewshed>();
+
+    let map = ecs.fetch::<Map>();
     let (delta_x, delta_y) = match dir {
         Direction::E => (1, 0),
         Direction::S => (0, 1),
@@ -30,11 +33,14 @@ fn try_move_player(dir: Direction, ecs: &mut World) {
         Direction::NW => (-1, -1),
     };
 
-    for (_player, pos) in (&mut players, &mut positions).join() {
-        let destination_idx = xy_idx(pos.x + delta_x, pos.y + delta_y);
-        if map[destination_idx] != TileType::Wall {
+    for (_player, pos, viewshed) in (&mut players, &mut positions, &mut viewsheds).join() {
+        let destination_idx = map.xy_idx(pos.x + delta_x, pos.y + delta_y);
+        if map.tiles[destination_idx] != TileType::Wall {
+
             pos.x = min(79 , max(0, pos.x + delta_x));
             pos.y = min(49, max(0, pos.y + delta_y));
+
+            viewshed.dirty = true;
         }
     }
 }

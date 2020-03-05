@@ -3,7 +3,7 @@ use specs::prelude::*;
 use super::{Position, Player, TileType, xy_idx, State};
 use std::cmp::{min, max};
 
-pub enum Direction {
+enum Direction {
     N,
     S,
     W,
@@ -15,7 +15,7 @@ pub enum Direction {
 }
 
 
-pub fn try_move_player(dir: Direction, ecs: &mut World) {
+fn try_move_player(dir: Direction, ecs: &mut World) {
     let mut positions = ecs.write_storage::<Position>();
     let mut players = ecs.write_storage::<Player>();
     let map = ecs.fetch::<Vec<TileType>>();

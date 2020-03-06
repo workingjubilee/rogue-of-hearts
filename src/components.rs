@@ -1,5 +1,5 @@
+use bracket_lib::prelude::{Point, RGB};
 use specs::prelude::*;
-use bracket_lib::prelude::{RGB, Point};
 
 #[derive(Component)]
 pub struct Position {
@@ -22,4 +22,12 @@ pub struct Viewshed {
     pub visible_tiles: Vec<Point>,
     pub range: i32,
     pub dirty: bool,
+}
+
+#[derive(Component, Debug)]
+pub struct Monster {}
+
+#[derive(Component, Debug)]
+pub struct Name {
+    pub name : String
 }

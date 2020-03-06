@@ -1,6 +1,6 @@
 use super::{Map, Player, Position, Viewshed};
-use specs::prelude::*;
 use bracket_lib::prelude::{field_of_view, Point};
+use specs::prelude::*;
 
 pub struct VisibilitySystem {}
 

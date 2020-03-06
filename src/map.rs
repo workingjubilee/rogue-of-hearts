@@ -1,6 +1,6 @@
+use super::Rect;
 use bracket_lib::prelude::*;
 use specs::World;
-use super::{Rect};
 use std::cmp::{max, min};
 
 // Requirements:

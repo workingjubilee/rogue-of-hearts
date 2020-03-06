@@ -1,4 +1,4 @@
-use bracket_lib::prelude::{VirtualKeyCode, BTerm};
+use bracket_lib::prelude::{BTerm, VirtualKeyCode};
 extern crate specs;
 use super::{Map, Player, Position, State, TileType, Viewshed};
 use specs::prelude::*;
@@ -14,7 +14,6 @@ enum Direction {
     SW,
     SE,
 }
-
 
 fn try_move_player(dir: Direction, ecs: &mut World) {
     let mut positions = ecs.write_storage::<Position>();
@@ -36,8 +35,7 @@ fn try_move_player(dir: Direction, ecs: &mut World) {
     for (_player, pos, viewshed) in (&mut players, &mut positions, &mut viewsheds).join() {
         let destination_idx = map.xy_idx(pos.x + delta_x, pos.y + delta_y);
         if map.tiles[destination_idx] != TileType::Wall {
-
-            pos.x = min(79 , max(0, pos.x + delta_x));
+            pos.x = min(79, max(0, pos.x + delta_x));
             pos.y = min(49, max(0, pos.y + delta_y));
 
             viewshed.dirty = true;
